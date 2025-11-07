@@ -11,13 +11,11 @@ body {
     color: #333; 
     line-height: 1.6;
     text-align: center;
-    overflow-x: hidden; /* Penting: mencegah scroll horizontal */
+    overflow-x: hidden; /* Penting: mencegah scroll horizontal di body */
     width: 100vw;
 }
 
-/* ======================================= */
-/* 1. LAYOUT UNTUK TRANSISI HALAMAN (SLIDE) */
-/* ======================================= */
+/* --- CONTAINER UTAMA & TRANSISI GESER (SLIDE) --- */
 #page-wrapper {
     display: flex; /* Menyusun semua halaman secara horizontal */
     width: 300vw; /* Lebar total 3 halaman (3 * 100vw) */
@@ -36,19 +34,19 @@ body {
     padding: 0;
 }
 
-/* KONTEN NON-COVER */
+/* Container untuk konten non-cover agar memiliki padding dan lebar maksimal */
 .content-container {
     max-width: 700px;
     margin: 0 auto;
     padding: 20px;
-    padding-bottom: 100px; /* Padding bawah agar tombol next/prev tidak menutupi konten */
+    padding-bottom: 100px; /* Jarak bawah */
 }
 
 /* ======================================= */
-/* 2. COVER SECTION (Halaman 1) */
+/* 1. COVER SECTION (Halaman 1) */
 /* ======================================= */
 #cover-section {
-    position: relative; /* Karena sudah fixed di parent #page-wrapper */
+    position: relative; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -61,7 +59,7 @@ body {
     transition: opacity 0.5s ease-out; 
 }
 
-/* Overlay untuk efek Blur dan Kecerahan Foto */
+/* Overlay untuk efek Blur/Kecerahan Foto Latar */
 #cover-overlay {
     position: absolute;
     top: 0;
@@ -74,7 +72,7 @@ body {
     z-index: 1;
 }
 
-/* Wrapper utama untuk semua teks di cover (Frosted Glass) */
+/* Wrapper utama untuk semua teks di cover (Frosted Glass Effect) */
 #cover-content-wrapper {
     position: relative;
     background-color: rgba(255, 255, 255, 0.6); 
@@ -95,14 +93,19 @@ body {
 
 /* Teks Cover */
 .tagline { font-size: 1.4em; color: #4CAF50; margin-bottom: 5px; }
-#cover-content-wrapper h1 { font-size: 2.8em; font-family: 'Playfair Display', serif; color: #2E8B57; margin: 0 0 25px 0; line-height: 1.1; }
+#cover-content-wrapper h1 { 
+    font-size: 2.8em; 
+    font-family: 'Playfair Display', serif; 
+    color: #2E8B57; 
+    margin: 0 0 25px 0; 
+    line-height: 1.1; 
+}
 .greeting-to { font-size: 1em; color: #555; margin-bottom: 5px; }
 #guest-target.guest-name-display { color: #333; font-size: 1.4em; font-weight: bold; margin-bottom: 5px; }
 .greeting-place { font-size: 1em; color: #555; margin-bottom: 25px; }
 .countdown-label { font-size: 0.9em; color: #666; margin-bottom: 10px; }
 
-
-/* COUNTDOWN */
+/* COUNTDOWN STYLE */
 .countdown-style {
     display: flex;
     justify-content: center;
@@ -110,7 +113,6 @@ body {
     margin: 0 0 30px 0; 
     font-size: 0.9em; 
 }
-
 .time-unit {
     background-color: #4CAF50; 
     color: white;
@@ -119,7 +121,6 @@ body {
     min-width: 60px; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
-
 .time-unit span {
     font-size: 1.8em; 
     font-weight: bold;
@@ -141,14 +142,13 @@ body {
     transition: background-color 0.3s, transform 0.2s;
     z-index: 2;
 }
-
 #buka-undangan-btn:hover {
     background-color: #3CB371; 
     transform: translateY(-2px);
 }
 
 /* ======================================= */
-/* 3. KONTEN UMUM (Halaman 2 & 3) */
+/* 2. KONTEN UMUM (Halaman 2 & 3) */
 /* ======================================= */
 h2 {
     font-family: 'Playfair Display', serif;
@@ -166,9 +166,9 @@ section {
 /* Halaman 2: Video Saja */
 #video-section {
     display: flex;
-    align-items: center; /* Memastikan video di tengah halaman */
+    align-items: center; 
     justify-content: center;
-    background-color: #f0f0f0; /* Latar belakang untuk halaman video */
+    background-color: #f0f0f0; 
     padding: 0;
 }
 #video-section .content-container {
@@ -180,6 +180,7 @@ section {
     height: auto;
     border-radius: 5px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    margin-bottom: 20px; /* Jarak dengan tombol kontrol */
 }
 
 /* KADO DIGITAL */
@@ -189,7 +190,6 @@ section {
     margin: 20px 0;
     border-bottom: 1px solid #e0e0e0;
 }
-
 .bank-info-container {
     display: flex;
     flex-wrap: wrap; 
@@ -197,7 +197,6 @@ section {
     gap: 25px; 
     margin-top: 25px;
 }
-
 .bank-box {
     border: 1px solid #A5D6A7;
     padding: 25px;
@@ -207,14 +206,12 @@ section {
     background-color: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
 }
-
 .bank-box h4 {
     font-family: 'Playfair Display', serif;
     color: #2E8B57;
     margin-bottom: 12px;
     font-size: 1.4em;
 }
-
 .btn-copy {
     background-color: #4CAF50; 
     color: white;
@@ -223,60 +220,5 @@ section {
     border-radius: 20px;
     cursor: pointer;
     margin-top: 15px;
-    font-size: 0.95em;
-    font-weight: 600;
-    transition: background-color 0.3s;
-}
-
-/* TOMBOL LOKASI */
-.btn-lokasi {
-    display: inline-block;
-    background-color: #4CAF50; 
-    color: white;
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 25px;
-    margin-top: 20px;
-    font-weight: 700;
-    font-size: 1.1em;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-/* UCAPAN TERIMA KASIH & PENUTUP */
-.penutup {
-    margin-bottom: 50px;
-    padding-top: 40px;
-    border-bottom: none;
-}
-.penutup h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2em;
-    color: #2E8B57;
-    margin-top: 20px;
-}
-
-/* TOMBOL NEXT/PREV */
-.btn-next, .btn-prev {
-    padding: 12px 25px; 
-    background-color: #2E8B57; 
-    color: white;
-    border: none;
-    border-radius: 25px; 
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 700;
-    margin-top: 30px;
-    transition: background-color 0.3s;
-    text-decoration: none;
-    display: block;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-}
-.btn-prev {
-    background-color: #6c757d; /* Abu-abu untuk tombol kembali */
-    margin-bottom: 50px;
-}
-.btn-next:hover { background-color: #3CB371; }
-.btn-prev:hover { background-color: #5a6268; }
-    
+    font-size:
+        

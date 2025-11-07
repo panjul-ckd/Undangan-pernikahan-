@@ -6,9 +6,10 @@
 }
 
 body {
-    font-family: 'Georgia', serif; 
-    background-color: #f8f8f8;
-    color: #4a4a4a;
+    /* Font Playfair Display untuk judul, Lato untuk teks biasa */
+    font-family: 'Lato', sans-serif; 
+    background-color: #f8fcf8; /* Abu-abu kehijauan sangat terang */
+    color: #333; 
     line-height: 1.6;
     text-align: center;
 }
@@ -25,7 +26,7 @@ body {
 }
 
 /* ======================================= */
-/* 1. COVER SECTION (Halaman 1) */
+/* 1. COVER SECTION (Halaman 1) - FULL SCREEN, BLUR */
 /* ======================================= */
 #cover-section {
     position: fixed;
@@ -37,102 +38,120 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
+    background-color: #eee; 
+    background-image: url('cover.jpg'); /* FOTO FULL BACKGROUND */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     z-index: 1000;
     padding: 20px; 
 }
 
+/* Wrapper untuk teks di cover dengan efek blur (Frosted Glass) */
+#cover-content-wrapper {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.4); /* Latar belakang semi-transparan putih */
+    backdrop-filter: blur(5px); /* EFEK BLUR */
+    -webkit-backdrop-filter: blur(5px); /* Untuk kompatibilitas Safari */
+    padding: 30px 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
 /* PERSONALISASI TAMU */
 .guest-name {
-    position: absolute;
-    top: 5%; 
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 400px;
-    background-color: #f0e6e6; 
-    padding: 10px;
+    position: static; 
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.7); 
+    padding: 10px 15px;
     border-radius: 5px;
-    color: #A0522D;
-    font-size: 0.9em;
-    z-index: 1001; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #4CAF50; /* Hijau cerah */
+    font-size: 1em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .guest-name strong {
-    font-size: 1.2em;
+    font-size: 1.3em;
     display: block;
     margin-top: 5px;
-    color: #4A2600; 
-}
-
-/* GAMBAR COVER */
-.cover-image {
-    width: 100%;
-    max-height: 40vh; 
-    object-fit: cover;
-    margin-bottom: 20px;
+    color: #2E8B57; /* Hijau gelap */
+    font-family: 'Playfair Display', serif; 
 }
 
 .cover-text h1 {
-    font-size: 2.5em;
-    font-family: 'Times New Roman', serif;
-    color: #8B4513; 
-    margin: 5px 0;
+    font-size: 3em; 
+    font-family: 'Playfair Display', serif; 
+    color: #2E8B57; /* Hijau gelap */
+    margin: 10px 0;
+    line-height: 1.1;
 }
 
 .tagline {
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-style: normal;
-    font-weight: 500;
-    color: #A0522D;
+    font-weight: 400;
+    color: #4CAF50; /* Hijau cerah */
+    margin-bottom: 5px;
 }
 
 .tanggal-singkat {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     font-weight: bold;
     font-style: italic;
+    font-size: 1.1em;
+    color: #555;
 }
 
 /* COUNTDOWN */
 .countdown-style {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin: 20px 0;
+    gap: 15px; 
+    margin: 20px 0 30px;
 }
 
 .time-unit {
-    background-color: #8B4513; 
+    background-color: #4CAF50; /* Hijau Utama */
     color: white;
-    padding: 8px;
-    border-radius: 5px;
-    font-size: 0.8em;
-    min-width: 60px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    min-width: 70px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .time-unit span {
     display: block;
-    font-size: 1.8em;
+    font-size: 2em; 
     font-weight: bold;
     line-height: 1;
+    font-family: 'Playfair Display', serif;
 }
 
 /* TOMBOL BUKA UNDANGAN */
 #buka-undangan-btn {
-    padding: 10px 30px;
-    background-color: #8B4513;
+    padding: 12px 35px; 
+    background-color: #2E8B57; /* Hijau gelap */
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px; 
     cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s;
+    font-size: 1.1em;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 #buka-undangan-btn:hover {
-    background-color: #A0522D;
+    background-color: #3CB371; 
+    transform: translateY(-2px);
 }
 
 
@@ -140,145 +159,117 @@ body {
 /* 2. KONTEN UMUM (Halaman 2 & 3) */
 /* ======================================= */
 h2 {
-    color: #8B4513;
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-size: 1.8em;
+    font-family: 'Playfair Display', serif;
+    color: #2E8B57; /* Hijau gelap */
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 2.2em;
 }
 
 section {
-    padding: 20px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-/* INFORMASI MEMPELAI */
-.info-mempelai {
-    margin-top: 50px; 
-}
-
-.mempelai-detail h3 {
-    color: #4A2600;
-    margin: 10px 0;
-    font-size: 1.5em;
-}
-
-.dan {
-    display: block;
-    font-size: 2em;
-    color: #A0522D;
-    margin: 15px 0;
+    padding: 30px 0;
+    border-bottom: 1px solid #e0e0e0; 
 }
 
 /* VIDEO UNDANGAN */
 .video-container {
     padding: 20px;
+    background-color: #fff; 
+    border-radius: 10px;
+    margin-top: 30px; 
 }
 .undangan-video {
     max-width: 100%;
     height: auto;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
-
-/* DETAIL ACARA */
-.detail-acara {
-    padding-bottom: 40px;
-}
-.acara-box {
-    background-color: #fff;
-    border: 1px solid #E0B0FF; 
-    border-radius: 8px;
-    padding: 20px;
-    margin: 15px auto;
-    max-width: 400px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.acara-box h3 {
-    color: #9370DB; 
-    margin-bottom: 10px;
-}
-
-.acara-box p {
-    margin: 5px 0;
-}
-
-/* ======================================= */
-/* 3. HALAMAN AKHIR (Kado, Maps, Buku Tamu) */
-/* ======================================= */
 
 /* KADO DIGITAL */
 .kado-digital-section {
     background-color: #fcfcfc;
     padding: 30px 20px;
     margin: 20px 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .bank-info-container {
     display: flex;
     flex-wrap: wrap; 
     justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
+    gap: 25px; 
+    margin-top: 25px;
 }
 
 .bank-box {
-    border: 1px solid #E0B0FF;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 280px;
+    border: 1px solid #A5D6A7;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 300px;
     width: 100%;
     background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
 }
 
 .bank-box h4 {
-    color: #4A2600;
-    margin-bottom: 10px;
+    font-family: 'Playfair Display', serif;
+    color: #2E8B57;
+    margin-bottom: 12px;
+    font-size: 1.4em;
 }
 
 .bank-box p {
-    margin: 5px 0;
-    font-size: 0.9em;
+    margin: 6px 0;
+    font-size: 0.95em;
+    color: #444;
 }
 
 .btn-copy {
-    background-color: #3CB371; 
+    background-color: #4CAF50; 
     color: white;
-    padding: 8px 15px;
+    padding: 10px 18px;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
-    margin-top: 10px;
-    font-size: 0.9em;
+    margin-top: 15px;
+    font-size: 0.95em;
+    font-weight: 600;
+    transition: background-color 0.3s;
 }
 
 .btn-copy:hover {
-    background-color: #2E8B57;
+    background-color: #3CB371;
+}
+
+.catatan {
+    font-size: 0.85em;
+    margin-top: 25px;
+    color: #888;
 }
 
 /* LOKASI MAPS (TOMBOL) */
 .maps-link-section {
     padding: 30px 20px;
     margin: 20px 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .btn-lokasi {
     display: inline-block;
-    background-color: #3CB371; 
+    background-color: #4CAF50; 
     color: white;
-    padding: 10px 20px;
+    padding: 12px 25px;
     text-decoration: none;
-    border-radius: 5px;
-    margin-top: 15px;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    border-radius: 25px;
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 1.1em;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .btn-lokasi:hover {
-    background-color: #2E8B57;
+    background-color: #3CB371;
+    transform: translateY(-2px);
 }
 
 /* BUKU TAMU / KOMENTAR */
@@ -289,22 +280,27 @@ section {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #fcfdfc;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .guestbook-section p {
     text-align: center;
+    color: #666;
 }
 
 /* UCAPAN TERIMA KASIH & PENUTUP */
 .penutup {
     margin-bottom: 50px;
-    padding-top: 30px;
+    padding-top: 40px;
     border-bottom: none;
 }
 
-.catatan {
-    font-size: 0.8em;
+.penutup h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2em;
+    color: #2E8B57;
     margin-top: 20px;
-    color: #888;
 }

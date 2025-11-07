@@ -50,7 +50,12 @@
                     <source src="video.mp4" type="video/mp4">
                     Browser Anda tidak mendukung pemutaran video.
                 </video>
-                </div>
+                
+                <button id="control-button" class="btn-control" onclick="toggleMedia()">
+                    <span id="control-icon">⏸️</span> Jeda Musik & Video
+                </button>
+                <button onclick="nextPage(3)" class="btn-next" style="margin-top: 20px;">Lanjut ke Detail Acara ➔</button>
+            </div>
         </div>
         
         <div id="detail-section" class="page-section">
@@ -102,6 +107,8 @@
         const audioLatar = document.getElementById('musik-latar');
         const videoUndangan = document.getElementById('undangan-video');
         const pageWrapper = document.getElementById('page-wrapper');
+        const controlButton = document.getElementById('control-button');
+        const controlIcon = document.getElementById('control-icon');
         const totalPages = 3; 
         let currentPage = 1;
 
@@ -123,14 +130,20 @@
             if (targetPage >= 1 && targetPage <= totalPages) {
                 currentPage = targetPage;
                 updatePageWrapper();
+                // Pastikan musik kembali diputar saat pindah dari halaman 2 ke 3
+                if (currentPage !== 2) { 
+                    audioLatar.play().catch(e => console.error("Gagal putar musik:", e));
+                }
             }
         }
 
         function bukaUndangan() {
             const cover = document.getElementById('cover-section');
             
-            // 1. Matikan musik latar saat transisi
-            audioLatar.pause();
+            // 1. Musik diputar mulai dari sini dan seterusnya
+            audioLatar.play().catch(error => {
+                console.error("Gagal putar musik:", error);
+            });
             
             cover.style.opacity = 0;
             
@@ -142,36 +155,53 @@
                 // 3. Otomatis putar video
                 videoUndangan.play().catch(error => {
                     console.error("Pemutaran video gagal: ", error);
-                    // Jika gagal (misalnya karena Autoplay Policy), langsung transisi ke Halaman 3
-                    nextPage(3); 
-                    audioLatar.play().catch(e => {}); // Coba putar musik jika video gagal
                 });
 
             }, 500); // Durasi fade out (sesuai CSS)
         }
+        
+        // --- KONTROL PLAY/PAUSE UNIVERSAL (Halaman 2) ---
+        function toggleMedia() {
+            if (videoUndangan.paused) {
+                // Jika sedang PAUSE, maka PLAY kedua media
+                videoUndangan.play();
+                audioLatar.pause(); // Musik harus dijeda karena video akan mengambil alih
+                controlIcon.textContent = '⏸️';
+                controlButton.innerHTML = '<span id="control-icon">⏸️</span> Jeda Musik & Video';
+            } else {
+                // Jika sedang PLAY, maka PAUSE kedua media
+                videoUndangan.pause(); 
+                audioLatar.play().catch(e => console.error("Gagal putar musik:", e)); // Musik dilanjutkan
+                controlIcon.textContent = '▶️';
+                controlButton.innerHTML = '<span id="control-icon">▶️</span> Putar Musik & Video';
+            }
+        }
+        
+        // --- SINKRONISASI MEDIA PADA EVENT VIDEO ---
 
-        // --- SINKRONISASI MEDIA ---
-
-        // 1. VIDEO SELESAI -> LANJUT KE HALAMAN 3
+        // 1. VIDEO SELESAI -> LANJUT KE HALAMAN 3 & PUTAR MUSIK
         videoUndangan.addEventListener('ended', () => {
-            // Setelah video selesai, langsung geser ke Halaman 3 (Detail)
             nextPage(3); 
-            // Putar kembali musik latar
             audioLatar.play().catch(error => {}); 
+            // Reset tombol kontrol
+            controlButton.innerHTML = '<span id="control-icon">⏸️</span> Jeda Musik & Video';
         });
 
-        // 2. JEDA MUSIK SAAT VIDEO DIPUTAR
+        // 2. VIDEO PLAY (Kontrol internal) -> JEDA MUSIK & UPDATE TOMBOL
         videoUndangan.addEventListener('play', () => {
-            if (!audioLatar.paused) {
+            // Jika video diputar oleh kontrol internal (bukan tombol toggleMedia)
+            if (currentPage === 2) {
                 audioLatar.pause();
+                controlButton.innerHTML = '<span id="control-icon">⏸️</span> Jeda Musik & Video';
             }
         });
 
-        // 3. PUTAR KEMBALI MUSIK SAAT VIDEO DIJEDA
+        // 3. VIDEO PAUSE (Kontrol internal) -> PUTAR MUSIK & UPDATE TOMBOL
         videoUndangan.addEventListener('pause', () => {
-             // Hanya play jika di halaman video dan video belum selesai
+            // Jika video dijeda oleh kontrol internal (bukan tombol toggleMedia)
             if (currentPage === 2 && !videoUndangan.ended) { 
                 audioLatar.play().catch(error => {});
+                controlButton.innerHTML = '<span id="control-icon">▶️</span> Putar Musik & Video';
             }
         });
         
@@ -233,5 +263,4 @@
     </script>
 
 </body>
-    </html>
-            
+</html>

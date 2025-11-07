@@ -26,27 +26,27 @@
     </audio>
 
     <div id="cover-section" class="section">
-        
-        <div id="cover-content-wrapper"> 
+        <div id="cover-overlay"></div> <div id="cover-content-wrapper"> 
+            
             <div id="guest-target" class="guest-name">Kepada Yth. Bapak/Ibu/Sdr/i</div>
             
             <div class="cover-text">
                 <p class="tagline">Undangan Pernikahan</p>
                 <h1>Albi & Aul</h1>
                 <p class="tanggal-singkat">15 November 2025</p>
-                
-                <div id="countdown-timer" class="countdown-style">
-                    </div>
-                
             </div>
-            <button onclick="bukaUndangan()" id="buka-undangan-btn">Buka Undangan</button>
+            
+            <div id="countdown-timer" class="countdown-shape">
+                </div>
+            
         </div>
+        
+        <button onclick="bukaUndangan()" id="buka-undangan-btn" class="action-shape">Buka Undangan</button>
     </div>
 
     <div id="main-content" class="content-hidden">
 
-        <section class="video-container" style="padding-top: 50px;">
-            <h2>Momen Kebersamaan Kami</h2>
+        <section class="video-container">
             <video controls width="100%" class="undangan-video">
                 <source src="video.mp4" type="video/mp4">
                 Browser Anda tidak mendukung pemutaran video.
@@ -83,26 +83,6 @@
             <p class="catatan">*Mohon berikan konfirmasi setelah transfer. Kehadiran Anda adalah kado terbaik.</p>
         </section>
 
-        <section class="guestbook-section">
-            <h2>Komentar / Pesan Singkat</h2> 
-            <p>Tinggalkan doa dan ucapan terbaik Anda di sini. Komentar akan terlihat oleh tamu lain.</p>
-            
-            <div id="disqus_thread"></div>
-            <script>
-                var disqus_config = function () {
-                    this.page.url = window.location.href;  
-                    this.page.identifier = 'undangan-albi-aul'; 
-                };
-                (function() { 
-                    var d = document, s = d.createElement('script');
-                    s.src = 'https://YOUR_DISQUS_SHORTNAME.disqus.com/embed.js';
-                    s.setAttribute('data-timestamp', +new Date());
-                    (d.head || d.body).appendChild(s);
-                })();
-            </script>
-            <noscript>Mohon aktifkan JavaScript untuk melihat komentar yang didukung oleh Disqus.</noscript>
-        </section>
-
         <section class="penutup">
             <h2>Albi & Aul</h2>
             <p>Mengucapkan terima kasih atas doa restu dan kehadiran Bapak/Ibu/Saudara/i sekalian.</p>
@@ -114,7 +94,6 @@
     <script>
         // --- SCRIPT COPY TO CLIPBOARD ---
         function copyToClipboard(text) {
-            // Perbarui untuk mengambil teks dari atribut data-copy jika perlu, namun saat ini mengambil dari argumen fungsi
             navigator.clipboard.writeText(text).then(() => {
                 alert("Nomor berhasil disalin: " + text);
             }).catch(err => {
@@ -163,17 +142,33 @@
             }, 1000);
         }
 
-        // --- FUNGSI UTAMA BUKA UNDANGAN ---
+        // --- FUNGSI UTAMA BUKA UNDANGAN DENGAN TRANSISI ---
         function bukaUndangan() {
-            document.getElementById('cover-section').style.display = 'none';
-            document.getElementById('main-content').classList.remove('content-hidden');
+            const cover = document.getElementById('cover-section');
+            const content = document.getElementById('main-content');
             
-            const musik = document.getElementById('musik-latar');
-            musik.play().catch(error => {
-                console.log("Pemutaran musik gagal: ", error);
-            });
+            // 1. Fade out Cover
+            cover.style.opacity = 0;
             
-            window.scrollTo(0, 0);
+            setTimeout(() => {
+                // 2. Sembunyikan Cover dan Tampilkan Konten
+                cover.style.display = 'none';
+                content.classList.remove('content-hidden');
+                
+                // 3. Fade in Konten
+                content.style.opacity = 0; // Set opacity 0 sebelum transisi
+                setTimeout(() => {
+                    content.style.opacity = 1;
+                    
+                    const musik = document.getElementById('musik-latar');
+                    musik.play().catch(error => {
+                        console.log("Pemutaran musik gagal: ", error);
+                    });
+                    
+                    window.scrollTo(0, 0);
+                }, 50); // Delay kecil agar transisi bekerja
+                
+            }, 500); // Durasi fade out (harus sama dengan transisi di CSS)
         }
 
         document.addEventListener('DOMContentLoaded', function() {

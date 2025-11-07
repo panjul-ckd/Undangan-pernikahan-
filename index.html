@@ -50,8 +50,7 @@
                     <source src="video.mp4" type="video/mp4">
                     Browser Anda tidak mendukung pemutaran video.
                 </video>
-                <button onclick="nextPage(3)" class="btn-next">Lanjut ke Detail Acara ➔</button>
-            </div>
+                </div>
         </div>
         
         <div id="detail-section" class="page-section">
@@ -108,10 +107,8 @@
 
         // --- FUNGSI TRANSISI HALAMAN (SLIDE) ---
         function updatePageWrapper() {
-            // Menggeser wrapper sesuai halaman saat ini
             pageWrapper.style.transform = `translateX(-${(currentPage - 1) * 100}vw)`;
             
-            // Mengelola kelas 'active'
             document.querySelectorAll('.page-section').forEach((section, index) => {
                 if (index + 1 === currentPage) {
                     section.classList.add('active');
@@ -132,10 +129,8 @@
         function bukaUndangan() {
             const cover = document.getElementById('cover-section');
             
-            // 1. Mulai Musik dan Fade out Cover
-            audioLatar.play().catch(error => {
-                console.log("Pemutaran musik gagal: ", error);
-            });
+            // 1. Matikan musik latar saat transisi
+            audioLatar.pause();
             
             cover.style.opacity = 0;
             
@@ -143,23 +138,40 @@
                 // 2. Transisi ke halaman 2 (Video)
                 cover.style.display = 'none';
                 nextPage(2);
+                
+                // 3. Otomatis putar video
+                videoUndangan.play().catch(error => {
+                    console.error("Pemutaran video gagal: ", error);
+                    // Jika gagal (misalnya karena Autoplay Policy), langsung transisi ke Halaman 3
+                    nextPage(3); 
+                    audioLatar.play().catch(e => {}); // Coba putar musik jika video gagal
+                });
+
             }, 500); // Durasi fade out (sesuai CSS)
         }
 
         // --- SINKRONISASI MEDIA ---
-        // Jeda musik saat video diputar
+
+        // 1. VIDEO SELESAI -> LANJUT KE HALAMAN 3
+        videoUndangan.addEventListener('ended', () => {
+            // Setelah video selesai, langsung geser ke Halaman 3 (Detail)
+            nextPage(3); 
+            // Putar kembali musik latar
+            audioLatar.play().catch(error => {}); 
+        });
+
+        // 2. JEDA MUSIK SAAT VIDEO DIPUTAR
         videoUndangan.addEventListener('play', () => {
             if (!audioLatar.paused) {
                 audioLatar.pause();
             }
         });
 
-        // Putar kembali musik saat video dijeda
+        // 3. PUTAR KEMBALI MUSIK SAAT VIDEO DIJEDA
         videoUndangan.addEventListener('pause', () => {
-            if (audioLatar.paused && currentPage !== 1) { // Hanya play jika bukan di halaman cover
-                audioLatar.play().catch(error => {
-                    console.log("Pemutaran musik gagal: ", error);
-                });
+             // Hanya play jika di halaman video dan video belum selesai
+            if (currentPage === 2 && !videoUndangan.ended) { 
+                audioLatar.play().catch(error => {});
             }
         });
         
@@ -216,10 +228,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             setGuestName();
             startCountdown();
-            // Set posisi awal halaman ke 1 (Cover)
             updatePageWrapper(); 
         });
     </script>
 
 </body>
-</html>
+    </html>
+            

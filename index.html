@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undangan Pernikahan Albi & Aul</title>
     <link rel="stylesheet" href="style.css">
+    
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
     <meta property="og:title" content="Undangan Pernikahan Albi & Aul">
     <meta property="og:description" content="Dengan hormat, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di hari bahagia kami.">
@@ -23,87 +27,30 @@
 
     <div id="cover-section" class="section">
         
-        <div id="guest-target" class="guest-name">Kepada Yth. Bapak/Ibu/Sdr/i</div>
-        
-        <img src="cover.jpg" alt="Cover Undangan Pernikahan" class="cover-image">
-        
-        <div class="cover-text">
-            <p class="tagline">Undangan Pernikahan</p>
-            <h1>Albi & Aul</h1>
-            <p class="tanggal-singkat">15 November 2025</p>
+        <div id="cover-content-wrapper"> 
+            <div id="guest-target" class="guest-name">Kepada Yth. Bapak/Ibu/Sdr/i</div>
             
-            <div id="countdown-timer" class="countdown-style">
-                </div>
-            
+            <div class="cover-text">
+                <p class="tagline">Undangan Pernikahan</p>
+                <h1>Albi & Aul</h1>
+                <p class="tanggal-singkat">15 November 2025</p>
+                
+                <div id="countdown-timer" class="countdown-style">
+                    </div>
+                
+            </div>
+            <button onclick="bukaUndangan()" id="buka-undangan-btn">Buka Undangan</button>
         </div>
-        <button onclick="bukaUndangan()" id="buka-undangan-btn">Buka Undangan</button>
     </div>
 
     <div id="main-content" class="content-hidden">
 
-        <section class="info-mempelai">
-            <h2>Dengan Hormat, Kami Mengundang Anda</h2>
-            <p>Maha Suci Allah yang telah menciptakan pasangan-pasangan dari jenis-jenis ini. Kami berharap kehadiran dan doa restu Anda...</p>
-
-            <div class="mempelai-detail">
-                <h3>Albi [Nama Lengkap Pria]</h3>
-                <p>Putra dari Bapak [Nama Ayah Albi] & Ibu [Nama Ibu Albi]</p>
-            </div>
-            
-            <span class="dan">&</span>
-
-            <div class="mempelai-detail">
-                <h3>Aul [Nama Lengkap Wanita]</h3>
-                <p>Putri dari Bapak [Nama Ayah Aul] & Ibu [Nama Ibu Aul]</p>
-            </div>
-        </section>
-
-        <section class="video-container">
+        <section class="video-container" style="padding-top: 50px;">
             <h2>Momen Kebersamaan Kami</h2>
             <video controls width="100%" class="undangan-video">
                 <source src="video.mp4" type="video/mp4">
                 Browser Anda tidak mendukung pemutaran video.
             </video>
-        </section>
-
-        <section class="detail-acara">
-            <h2>Waktu dan Tempat</h2>
-            
-            <div class="acara-box">
-                <h3><span role="img" aria-label="Ring">💍</span> Akad Nikah/Pemberkatan</h3>
-                <p><strong>Hari, Tanggal:</strong> Sabtu, 15 November 2025</p>
-                <p><strong>Pukul:</strong> [Waktu Mulai] WIB</p>
-                <p><strong>Lokasi:</strong> [Nama Tempat Akad]</p>
-            </div>
-
-            <div class="acara-box">
-                <h3><span role="img" aria-label="Party">🎉</span> Resepsi Pernikahan</h3>
-                <p><strong>Hari, Tanggal:</strong> Sabtu, 15 November 2025</p>
-                <p><strong>Pukul:</strong> [Waktu Mulai] - [Waktu Selesai] WIB</p>
-                <p><strong>Lokasi:</strong> [Nama Tempat Resepsi]</p>
-            </div>
-        </section>
-        
-        <section class="kado-digital-section">
-            <h2>Kirim Kado Digital</h2>
-            <p>Bagi yang ingin memberikan tanda kasih secara non-tunai, dapat melalui:</p>
-            
-            <div class="bank-info-container">
-                <div class="bank-box">
-                    <h4><span role="img" aria-label="Bank">🏦</span> Bank BCA</h4>
-                    <p><strong>No. Rek:</strong> 1234 567 890</p>
-                    <p><strong>A.N.:</strong> Albi [Nama Lengkap]</p>
-                    <button class="btn-copy" onclick="copyToClipboard('1234567890')">Salin No. Rek</button>
-                </div>
-                
-                <div class="bank-box">
-                    <h4><span role="img" aria-label="E-wallet">💳</span> E-Wallet DANA/GOPAY</h4>
-                    <p><strong>No. HP:</strong> 0812 3456 7890</p>
-                    <p><strong>A.N.:</strong> Aul [Nama Lengkap]</p>
-                    <button class="btn-copy" onclick="copyToClipboard('081234567890')">Salin No. HP</button>
-                </div>
-            </div>
-            <p class="catatan">*Mohon berikan konfirmasi setelah transfer. Kehadiran Anda adalah kado terbaik.</p>
         </section>
 
         <section class="maps-link-section">
@@ -114,8 +61,30 @@
             </a>
         </section>
         
+        <section class="kado-digital-section">
+            <h2>Kirim Kado Digital</h2>
+            <p>Bagi yang ingin memberikan tanda kasih secara non-tunai, dapat melalui:</p>
+            
+            <div class="bank-info-container">
+                <div class="bank-box">
+                    <h4><span role="img" aria-label="Bank">🏦</span> Bank BCA</h4>
+                    <p><strong>No. Rek:</strong> [NOMOR REKENING BCA]</p>
+                    <p><strong>A.N.:</strong> Albi Malik Alnur</p>
+                    <button class="btn-copy" onclick="copyToClipboard('[NOMOR REKENING BCA]')">Salin No. Rek</button>
+                </div>
+                
+                <div class="bank-box">
+                    <h4><span role="img" aria-label="E-wallet">💳</span> E-Wallet DANA/GOPAY</h4>
+                    <p><strong>No. HP:</strong> [NOMOR HP E-WALLET]</p>
+                    <p><strong>A.N.:</strong> Nur Aulia Pratiwi</p>
+                    <button class="btn-copy" onclick="copyToClipboard('[NOMOR HP E-WALLET]')">Salin No. HP</button>
+                </div>
+            </div>
+            <p class="catatan">*Mohon berikan konfirmasi setelah transfer. Kehadiran Anda adalah kado terbaik.</p>
+        </section>
+
         <section class="guestbook-section">
-            <h2>Doa & Ucapan Tamu</h2>
+            <h2>Komentar / Pesan Singkat</h2> 
             <p>Tinggalkan doa dan ucapan terbaik Anda di sini. Komentar akan terlihat oleh tamu lain.</p>
             
             <div id="disqus_thread"></div>
@@ -135,9 +104,9 @@
         </section>
 
         <section class="penutup">
-            <h2>Ucapan Terima Kasih</h2>
-            <p>Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i sekalian, kami Albi & Aul mengucapkan **terima kasih** yang tak terhingga.</p>
-            <h3 style="color: #4A2600;">Kami yang berbahagia,<br>Albi & Aul</h3>
+            <h2>Albi & Aul</h2>
+            <p>Mengucapkan terima kasih atas doa restu dan kehadiran Bapak/Ibu/Saudara/i sekalian.</p>
+            <h3 style="color: #2E8B57;">Kami yang berbahagia</h3>
             <p class="catatan">Dibuat dengan penuh cinta. Nov 2025</p>
         </section>
     </div>
@@ -145,6 +114,7 @@
     <script>
         // --- SCRIPT COPY TO CLIPBOARD ---
         function copyToClipboard(text) {
+            // Perbarui untuk mengambil teks dari atribut data-copy jika perlu, namun saat ini mengambil dari argumen fungsi
             navigator.clipboard.writeText(text).then(() => {
                 alert("Nomor berhasil disalin: " + text);
             }).catch(err => {
